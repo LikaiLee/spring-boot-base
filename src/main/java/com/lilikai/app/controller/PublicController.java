@@ -12,10 +12,4 @@ public class PublicController {
 		model.addAttribute("appName", "Spring-Boot App");
 		return "public/index";
 	}
-
-	@RequestMapping(value = "/test")
-	public String test(Model model) {
-		model.addAttribute("appName", "Spring-Boot App");
-		return "public/test";
-	}
 }

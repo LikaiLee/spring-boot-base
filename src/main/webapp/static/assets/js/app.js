@@ -29,13 +29,19 @@ APP.prototype.ajax = function(opt) {
 		params.push(encodeURIComponent(key) + '=' + encodeURIComponent(opt.data[key]));
 	}
 	var postData = params.join('&');
-	if (opt.method.toUpperCase() === 'POST') {
-		xmlHttp.open(opt.method, opt.url, opt.async);
+	var method = opt.method.toUpperCase();
+	switch (method) {
+	case 'POST':
+		xmlHttp.open(method, opt.url, opt.async);
 		xmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=utf-8');
 		xmlHttp.send(postData);
-	} else if (opt.method.toUpperCase() === 'GET') {
-		xmlHttp.open(opt.method, opt.url + '?' + postData, opt.async);
+		break;
+	case 'GET':
+		xmlHttp.open(method, opt.url + '?' + postData, opt.async);
 		xmlHttp.send(null);
+		break;
+	default:
+		break;
 	}
 	xmlHttp.onreadystatechange = function() {
 		if (xmlHttp.readyState === 4) {

@@ -1,16 +1,9 @@
 package com.lilikai.app.utils;
 
-import java.beans.BeanInfo;
-import java.beans.IntrospectionException;
-import java.beans.Introspector;
-import java.beans.PropertyDescriptor;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -23,30 +16,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 
 /**
  * 工具类
  *
  */
 public class AppUtils {
-
-	/**
-	 * 给sessionName加上前缀，以避免和其他项目冲突(前缀是项目名称)
-	 * 
-	 * @param sessionName
-	 * @return
-	 */
-	public static String formatSessionName(String sessionName) {
-		// -
-		// /usr/local/Cellar/tomcat/7.0.50/libexec/webapps/shdyj-admin/WEB-INF/classes/
-		String path = AppUtils.class.getClassLoader().getResource("").getPath();
-		String flagStr = "/WEB-INF/classes/";
-		if (path.indexOf(flagStr) != -1) {
-			path = path.substring(0, path.length() - flagStr.length());
-			path = path.substring(path.lastIndexOf("/") + 1);
-		}
-		return path + "_" + sessionName;
-	}
 
 	/**
 	 * 格式化参数map，将参数最后一个值作为真实值 ;如/?a=1&b=2&a=3，最终a=3
@@ -136,69 +115,33 @@ public class AppUtils {
 	}
 
 	/**
-	 * 命名由驼峰法变下划线小写
+	 * 将对象的大写转换为下划线加小写，例如：userName-->user_name
 	 * 
-	 * @return return "" if name is null or empty
+	 * @param object
+	 * @return
+	 * @throws JsonProcessingException
 	 */
-	public static String underscoreName(String name) {
-		if (name == null || name.isEmpty()) {
-			return "";
-		}
-		StringBuilder result = new StringBuilder();
-		String[] letters = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R",
-				"S", "T", "U", "V", "W", "X", "Y", "Z" };
-		// 将第一个字符处理成小写
-		result.append(name.substring(0, 1).toLowerCase());
-		// 循环处理其余字符
-		for (int i = 1; i < name.length(); i++) {
-			String s = name.substring(i, i + 1);
-			// 在大写字母前添加下划线
-			if (Arrays.asList(letters).contains(s)) {
-				result.append("_");
-			}
-			// 其他字符直接转成小写
-			result.append(s.toLowerCase());
-		}
-		return result.toString();
+	public static String toUnderlineJSONString(Object object) throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+		mapper.setSerializationInclusion(Include.NON_NULL);
+		String reqJson = mapper.writeValueAsString(object);
+		return reqJson;
 	}
 
 	/**
-	 * 命名由下划线小写变驼峰法
+	 * 将下划线转换为驼峰的形式，例如：user_name-->userName
 	 * 
-	 * @param name
-	 *            待转换的下划线名称
-	 * @param isFirstUpperCase
-	 *            首字母是否需要大写，默认小写
-	 * @return return null if name is null or empty
+	 * @param json
+	 * @param clazz
+	 * @return
+	 * @throws IOException
 	 */
-	public static String camelName(String name, Boolean... isFirstUpperCase) {
-		if (name == null || name.isEmpty()) {
-			return "";
-		}
-		StringBuilder result = new StringBuilder();
-		if (isFirstUpperCase.length != 0 && isFirstUpperCase[0]) {
-			// 将第一个字符处理成大写
-			result.append(name.substring(0, 1).toUpperCase());
-		} else {
-			// 将第一个字符保持不变
-			result.append(name.substring(0, 1));
-		}
-
-		// 循环处理其余字符
-		for (int i = 1; i < name.length(); i++) {
-			String s = name.substring(i, i + 1);
-			// 遇到下划线则舍弃，并把后一个字符变大写
-			if (s.equals("_")) {
-				i++;
-				String nextChar = name.substring(i, i + 1);
-				result.append(nextChar.toUpperCase());
-			} else {
-				// 其他字符直接追加上
-				result.append(s);
-			}
-
-		}
-		return result.toString();
+	public static <T> T toSnakeObject(String json, Class<T> clazz) throws IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+		T reqJson = mapper.readValue(json, clazz);
+		return reqJson;
 	}
 
 	/**
