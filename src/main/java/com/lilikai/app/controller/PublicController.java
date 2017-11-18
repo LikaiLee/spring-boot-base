@@ -10,6 +10,6 @@ public class PublicController {
 	@RequestMapping("/")
 	public String login(Model model) {
 		model.addAttribute("appName", "Spring-Boot App");
-		return "public/index";
+		return "index";
 	}
 }

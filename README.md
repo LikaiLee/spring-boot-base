@@ -7,7 +7,7 @@
   - [x] 集成MyBatis插件
   - [x] 代码生成器生成基础业务模板
   - [x] 两种模式：RESTful和普通页面
-  - [x] FreeMarker
+  - [x] Thymeleaf 模板引擎
   - [x] 热部署
 
 ## 使用

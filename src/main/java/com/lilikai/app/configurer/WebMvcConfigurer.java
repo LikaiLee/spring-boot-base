@@ -98,10 +98,10 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 		// registry.addMapping("/**");
 	}
 	// 静态资源
-	@Override
+	/*@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/static/**").addResourceLocations("/static/");
-	}
+	}*/
 
 	// 添加拦截器
 	@Override
