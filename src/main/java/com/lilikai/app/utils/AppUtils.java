@@ -26,6 +26,19 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
  *
  */
 public class AppUtils {
+	/**
+	 * 首字母大写
+	 * 
+	 * @param str
+	 * @return
+	 */
+	public static String upperCaseFirstLetter(String str) {
+		char[] ch = str.toCharArray();
+		if (ch[0] >= 'a' && ch[0] <= 'z') {
+			ch[0] = (char) (ch[0] - 32);
+		}
+		return new String(ch);
+	}
 
 	/**
 	 * 格式化参数map，将参数最后一个值作为真实值 ;如/?a=1&b=2&a=3，最终a=3

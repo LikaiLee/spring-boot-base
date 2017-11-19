@@ -10,7 +10,7 @@
   - [x] 集成Thymeleaf 3.0 模板
   - [x] 集成Swagger2 (http://localhost:1337/swagger-ui.html)
   - [x] 热部署
-  - [] 集成JPA
+  - [ ] 集成JPA
 
 ## 使用
   1. clone 项目 | 数据表导入(mysql_data.sql)
