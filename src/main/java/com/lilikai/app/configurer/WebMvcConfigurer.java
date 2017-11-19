@@ -97,11 +97,6 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 	public void addCorsMappings(CorsRegistry registry) {
 		// registry.addMapping("/**");
 	}
-	// 静态资源
-	/*@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/static/**").addResourceLocations("/static/");
-	}*/
 
 	// 添加拦截器
 	@Override

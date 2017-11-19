@@ -1,5 +1,7 @@
 package com.lilikai.app.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PublicController {
 
 	@RequestMapping("/")
-	public String login(Model model) {
+	public String login(Model model, HttpServletRequest request) {
 		model.addAttribute("appName", "Spring-Boot App");
 		return "index";
 	}

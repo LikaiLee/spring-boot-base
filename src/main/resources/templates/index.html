@@ -1,10 +1,43 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8"></meta>
-  <title>Document</title>
+<title>Document</title>
+<!-- <link rel="stylesheet" th:href="@{/static/assets/css/global.css}" /> -->
+<link rel="shortcut icon" th:href="@{/static/favicon.ico}">
 </head>
 <body>
-  <h1 th:text="'Hello, ' + ${appName} + '!'" >Spring-Boot</h1>
+	<img th:src="@{/static/assets/images/avatar.png}" width="100" height="100" />
+	<h1 th:text="'Hello, ' + ${appName} + '!'">Spring-Boot</h1>
+	
+	<div id="name">name:</div>
+	<button id="btn">发送请求</button>
+	<div class="list">......</div>
+
+	<script th:src="@{/static/assets/js/app.js}"></script>
+	<script>
+		var app = new APP("李立凯");
+		var appInfo = app.getAppInfo();
+		console.log(appInfo);
+		document.querySelector('#name').innerHTML += JSON.stringify(appInfo);
+		var btn = document.querySelector('#btn');
+		btn.onclick = function() {
+			app.ajax({
+				method : 'post',
+				url : 'user/list',
+				data : {
+					page : 1,
+					size : 2
+				},
+				success : function(res) {
+					var data = JSON.parse(res)
+					console.log(data)
+					document.querySelector('.list').innerHTML = res;
+				},
+				error : function(statusCode) {
+					alert("请求失败，错误码为：" + statusCode);
+				}
+			})
+		}
+	</script>
 </body>
 </html>

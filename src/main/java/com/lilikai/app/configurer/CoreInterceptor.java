@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -13,7 +14,7 @@ public class CoreInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		String scheme = request.getScheme();
+		/*String scheme = request.getScheme();
 		String serverName = request.getServerName();
 		int serverPort = request.getServerPort();
 		
@@ -24,12 +25,10 @@ public class CoreInterceptor implements HandlerInterceptor {
 			fullUrl = url + "?" + request.getQueryString();
 		}
 
-		request.setAttribute("__SERVER__", server);
-		request.setAttribute("__URL__", url);
-		request.setAttribute("__FULL_URL__", fullUrl);
-		request.setAttribute("__STATIC__", server + ProjectConstant.STATIC_DIR);
-		
-		
+		request.setAttribute("_SERVER_", server);
+		request.setAttribute("_URL_", url);
+		request.setAttribute("_FULL_URL_", fullUrl);
+		request.setAttribute("_STATIC_", server + ProjectConstant.STATIC_DIR);*/
 		return true;
 	}
 
