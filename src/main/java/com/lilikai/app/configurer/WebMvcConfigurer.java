@@ -97,6 +97,11 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 	public void addCorsMappings(CorsRegistry registry) {
 		// registry.addMapping("/**");
 	}
+	// 例外资源
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
+	}
 
 	// 添加拦截器
 	@Override
