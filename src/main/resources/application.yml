@@ -1,0 +1,21 @@
+server:
+  port: 1337
+
+spring:
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?tinyInt1isBit=false&characterEncoding=utf8
+    username: root
+    password: pwd123456
+    driver-class-name: com.mysql.jdbc.Driver
+  mvc:
+    throw-exception-if-no-handler-found: true
+    static-path-pattern: /static/**
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    content-type: text/html
+    cache: false
