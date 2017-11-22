@@ -18,10 +18,15 @@ public class PublicController {
 	private UserService userService;
 
 	@RequestMapping("/")
-	public String login(Model model, HttpServletRequest request) {
+	public String index(Model model, HttpServletRequest request) {
 		List<User> list = userService.findAll();
 		model.addAttribute("appName", "Spring-Boot App");
 		model.addAttribute("list", list);
 		return "index";
+	}
+
+	@RequestMapping("/map")
+	public String map() {
+		return "map/index";
 	}
 }

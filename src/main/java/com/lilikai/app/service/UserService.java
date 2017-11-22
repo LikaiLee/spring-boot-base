@@ -11,4 +11,5 @@ import com.lilikai.app.model.User;
 public interface UserService extends Service<User> {
 	User getUserById(Integer id);
 	List<User> getAll();
+	List<User> getTest(String name);
 }

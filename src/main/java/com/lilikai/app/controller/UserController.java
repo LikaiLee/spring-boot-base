@@ -38,6 +38,11 @@ public class UserController {
 		userService.save(user);
 		return ResultGenerator.genSuccessResult();
 	}
+	
+	@GetMapping("/test/{name}")
+	public Result test(@PathVariable("name") String name) {
+		return ResultGenerator.genSuccessResult(userService.getTest(name));
+	}
 
 	@ApiOperation(value = "删除用户", notes = "根据id删除用户")
 	@ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "Integer")

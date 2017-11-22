@@ -30,4 +30,11 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
 	public List<User> getAll() {
 		return xUserMapper.selectAll();
 	}
+
+	@Override
+	public List<User> getTest(String name) {
+		// TODO Auto-generated method stub
+		return xUserMapper.getTest(name);
+	}
+	
 }

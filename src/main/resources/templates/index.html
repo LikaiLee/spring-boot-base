@@ -35,6 +35,7 @@
 	</table>
 	
 	<script th:src="@{/static/assets/js/app.js}"></script>
+	<script th:src="@{/static/assets/js/utils.js}"></script>
 	<script>
 		var app = new APP("李立凯");
 		var appInfo = app.getAppInfo();
@@ -42,15 +43,15 @@
 		document.querySelector('#name').innerHTML += JSON.stringify(appInfo);
 		var btn = document.querySelector('#btn');
 		btn.onclick = function() {
-			app.ajax({
+			U.ajax({
 				method : 'post',
 				url : 'user/list',
 				data : {
 					page : 1,
 					size : 2
 				},
-				success : function(res) {
-					var data = JSON.parse(res)
+				responseType: 'json',
+				success : function(data) {
 					console.log(data)
 					document.querySelector('.list').innerHTML = res;
 				},
