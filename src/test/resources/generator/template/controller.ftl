@@ -1,6 +1,5 @@
 package ${basePackage}.controller;
 
-import ${basePackage}.core.Result;
 import ${basePackage}.core.ResultGenerator;
 import ${basePackage}.model.${modelNameUpperCamel};
 import ${basePackage}.service.${modelNameUpperCamel}Service;
@@ -11,11 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
-* Created by ${author} on ${date}.
-*/
+ * Created by ${author} on ${date}.
+ */
 @Controller
 @RequestMapping("${baseRequestMapping}")
 public class ${modelNameUpperCamel}Controller {
@@ -23,34 +23,46 @@ public class ${modelNameUpperCamel}Controller {
     private ${modelNameUpperCamel}Service ${modelNameLowerCamel}Service;
 
     @RequestMapping("/add")
-    public Result add(${modelNameUpperCamel} ${modelNameLowerCamel}) {
-        ${modelNameLowerCamel}Service.save(${modelNameLowerCamel});
-        return ResultGenerator.genSuccessResult();
+    public String add(${modelNameUpperCamel} ${modelNameLowerCamel}, HttpServletResponse response) {
+        int flag = ${modelNameLowerCamel}Service.save(${modelNameLowerCamel});
+        if (flag == 1) {
+            return ResultGenerator.ajaxReturn(response, "", "success", flag);
+        } else {
+            return ResultGenerator.ajaxReturn(response, "", "fail", 0);
+        }
     }
 
     @RequestMapping("/delete")
-    public Result delete(@RequestParam Integer id) {
-        ${modelNameLowerCamel}Service.deleteById(id);
-        return ResultGenerator.genSuccessResult();
+    public String delete(@RequestParam Integer id, HttpServletResponse response) {
+        int flag = ${modelNameLowerCamel}Service.deleteById(id);
+        if (flag == 1) {
+            return ResultGenerator.ajaxReturn(response, "", "success", flag);
+        } else {
+            return ResultGenerator.ajaxReturn(response, "", "fail", 0);
+        }
     }
 
     @RequestMapping("/update")
-    public Result update(${modelNameUpperCamel} ${modelNameLowerCamel}) {
-        ${modelNameLowerCamel}Service.update(${modelNameLowerCamel});
-        return ResultGenerator.genSuccessResult();
+    public String update(${modelNameUpperCamel} ${modelNameLowerCamel}, HttpServletResponse response) {
+        int flag = ${modelNameLowerCamel}Service.update(${modelNameLowerCamel});
+        if (flag == 1) {
+            return ResultGenerator.ajaxReturn(response, "", "success", flag);
+        } else {
+            return ResultGenerator.ajaxReturn(response, "", "fail", 0);
+        }
     }
 
     @RequestMapping("/detail")
-    public Result detail(@RequestParam Integer id) {
+    public String detail(@RequestParam Integer id, HttpServletResponse response) {
         ${modelNameUpperCamel} ${modelNameLowerCamel} = ${modelNameLowerCamel}Service.findById(id);
-        return ResultGenerator.genSuccessResult(${modelNameLowerCamel});
+        return ResultGenerator.ajaxReturn(response, ${modelNameLowerCamel}, "", 0);
     }
 
     @RequestMapping("/list")
-    public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
+    public String list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size, HttpServletResponse response) {
         PageHelper.startPage(page, size);
         List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.findAll();
         PageInfo<${modelNameUpperCamel}> pageInfo = new PageInfo<${modelNameUpperCamel}>(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+        return ResultGenerator.ajaxReturn(response, pageInfo, "", 0);
     }
 }

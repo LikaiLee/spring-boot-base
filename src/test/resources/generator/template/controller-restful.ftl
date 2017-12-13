@@ -12,15 +12,15 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
-* Created by ${author} on ${date}.
-*/
+ * Created by ${author} on ${date}.
+ */
 @RestController
 @RequestMapping("${baseRequestMapping}")
 public class ${modelNameUpperCamel}Controller {
     @Resource
     private ${modelNameUpperCamel}Service ${modelNameLowerCamel}Service;
 
-    @PostMapping
+    @PostMapping("/{id}")
     public Result add(@RequestBody ${modelNameUpperCamel} ${modelNameLowerCamel}) {
         ${modelNameLowerCamel}Service.save(${modelNameLowerCamel});
         return ResultGenerator.genSuccessResult();
@@ -32,7 +32,7 @@ public class ${modelNameUpperCamel}Controller {
         return ResultGenerator.genSuccessResult();
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public Result update(@RequestBody ${modelNameUpperCamel} ${modelNameLowerCamel}) {
         ${modelNameLowerCamel}Service.update(${modelNameLowerCamel});
         return ResultGenerator.genSuccessResult();
@@ -44,7 +44,7 @@ public class ${modelNameUpperCamel}Controller {
         return ResultGenerator.genSuccessResult(${modelNameLowerCamel});
     }
 
-    @GetMapping
+    @GetMapping("/list")
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);
         List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.findAll();

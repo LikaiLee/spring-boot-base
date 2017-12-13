@@ -53,7 +53,7 @@
 				responseType: 'json',
 				success : function(data) {
 					console.log(data)
-					document.querySelector('.list').innerHTML = res;
+					document.querySelector('.list').innerHTML = JSON.stringify(data);
 				},
 				error : function(statusCode) {
 					alert("请求失败，错误码为：" + statusCode);

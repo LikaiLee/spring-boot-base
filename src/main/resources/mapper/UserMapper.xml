@@ -13,7 +13,7 @@
     <result column="add_time" jdbcType="INTEGER" property="addTime" />
     <result column="is_active" jdbcType="INTEGER" property="isActive" />
   </resultMap>
-  <select id="getUserById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="getUserTest" parameterType="java.lang.Integer" resultMap="BaseResultMap">
   	select * from x_user 
 	where id = #{id}
   </select>

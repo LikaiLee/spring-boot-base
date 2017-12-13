@@ -20,8 +20,8 @@ import java.util.*;
 public class CodeGenerator {
 	// 数据表配置
 	private static final String JDBC_TABLE_PREFIX = "x_"; // 数据表前缀
-	private static final String JDBC_TABLE_NAME = "role"; // 数据表名 -> 无前缀
-	private static final boolean IS_RESTFUL_MODE = true; // 是否生成RESTful形式的代码
+	private static final String JDBC_TABLE_NAME = "user"; // 数据表名 -> 无前缀
+	private static final boolean IS_RESTFUL_MODE = false; // 是否生成RESTful形式的代码
 	// 数据库配置
 	private static final String JDBC_URL = "jdbc:mysql://localhost:3306/test";
 	private static final String JDBC_USERNAME = "root";
@@ -38,7 +38,7 @@ public class CodeGenerator {
 	private static final String PACKAGE_PATH_SERVICE_IMPL = packageConvertPath(SERVICE_IMPL_PACKAGE);// 生成的Service实现存放路径
 	private static final String PACKAGE_PATH_CONTROLLER = packageConvertPath(CONTROLLER_PACKAGE);// 生成的Controller存放路径
 
-	private static final String AUTHOR = "李立凯";
+	private static final String AUTHOR = "LikaiLee";
 	private static final String DATE = new SimpleDateFormat("yyyy/MM/dd").format(new Date());// @date
 
 	public static void main(String[] args) {
