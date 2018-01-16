@@ -19,3 +19,6 @@ spring:
     encoding: UTF-8
     content-type: text/html
     cache: false
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
